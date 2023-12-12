@@ -6,6 +6,8 @@ const path = require('path');
 // Importacion de handleabars
 const { engine }  = require('express-handlebars')
 
+// importar methoOverride
+const methodOverride = require('method-override');
 
 // Inicializaciones
 const app = express()
@@ -33,7 +35,7 @@ app.set('view engine','.hbs')
 // Middlewares 
 // El servidor va a trabajar con informacion en vase a formularios
 app.use(express.urlencoded({extended:false}))
-
+app.use(methodOverride('_method'))
 
 // Variables globales
 
@@ -48,6 +50,7 @@ app.use(express.urlencoded({extended:false}))
 
 app.use(require('./routers/index.routes'))
 
+app.use(require('./routers/portafolio.routes'))
 // Archivos estáticos
 //Definir archivos estaticos y publicos 
 app.use(express.static(path.join(__dirname,'public')))

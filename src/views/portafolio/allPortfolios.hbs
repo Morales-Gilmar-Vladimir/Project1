@@ -1,0 +1,50 @@
+<!-- Portfolio Section-->
+<section class="page-section mt-5" id="login">
+    <div class="container">
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">All my Portfolios</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <!-- Section Portfolios -->
+        <div class="row justify-content-center">
+            <section class=" portfolio" id="portfolio">
+                <div class="container">
+                        <div class="text-end mb-3">
+                            <a href="/portafolio/add" class="text-decoration-none">
+                                <button class="btn btn-success btn-xl" type="submit">Create new portfolio</button>
+                            </a>
+                        </div>
+                    <div class="row justify-content-center">
+                        {{#each portfolios}}
+                        <div class="col-md-6 col-lg-4 mb-2">
+                            <div class="card h-100">
+                                <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/044.webp" class="card-img-top" alt="Skyscrapers"/>
+                                <div class="card-body">
+                                    <h5 class="card-title text-decoration-underline">{{title}}</h5>
+                                    <p class="card-text">{{description}}</p>
+                                    <small class="text-muted">{{category}}</small>
+                                </div>
+                                <div class="card-footer text-center">
+                                    <button class="btn btn-primary btn-sm">More infromation</button>
+                                    <a href="/portafolio/edit/{{_id}}" >
+                                    <button class="btn btn-warning btn-sm">Update</button>
+                                    </a>
+                                    <form action="/portafolio/delete/{{_id}}?_method=DELETE" method="POST" class="d-inline">
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

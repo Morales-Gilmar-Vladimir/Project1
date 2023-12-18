@@ -8,6 +8,4 @@ const router = Router()
 
 router.get('/',renderIndex)
 
-router.get('/login',renderLogin)
-
 module.exports = router

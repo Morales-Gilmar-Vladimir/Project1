@@ -1,0 +1,53 @@
+<!-- Portfolio Section-->
+        <section class="page-section mt-5" id="login">
+            <div class="container">
+                <!-- Contact Section Heading-->
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Update Portfolio</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+
+                <!-- Portfolio Section Form-->
+                <div class="row justify-content-center">
+                    <div class="col-lg-8 col-xl-7">
+                        <form action="/portafolio/edit/{{portfolio._id}}?_method=PUT" method="POST" class="d-inline">
+                            
+                            <input type="hidden" name="_method" value="PUT">
+                            
+                            <!-- Title input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="title" type="text" placeholder="Enter your title..." required name="title"
+                                value="{{portfolio.title}}"/>
+                                <label for="title">Title</label>
+                            </div>
+
+                            <!-- Category input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="category" type="text" placeholder="Enter your title..." required name="category"
+                                value="{{portfolio.category}}"/>
+                                <label for="category">Category</label>
+                            </div>
+
+                            <!-- Description input-->
+                            <div class="form-floating mb-3">
+                                <textarea class="form-control" id="description" type="text" placeholder="Enter your message here..." style="height: 10rem" required name="description">{{portfolio.description}}</textarea>
+                                <label for="description">Description</label>
+                            </div>
+
+                            <!-- Submit Button-->
+                            <div class="text-start">
+                            <button class="btn btn-primary btn-xl d-block w-100" type="submit">Send</button>
+                            </div>
+                        </form>
+                        <div class="text-end mt-3">
+                            <a href="/portafolios" class="text-decoration-none">
+                                <button class="btn btn-secondary btn-xl d-block w-100 h-10" type="submit">Cancel</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>

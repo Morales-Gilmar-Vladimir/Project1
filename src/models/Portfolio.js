@@ -19,4 +19,6 @@ const portfolioSchema = new Schema({
     timestamps:true
 })
 
+
+
 module.exports = model('portfolio',portfolioSchema)

@@ -14,7 +14,7 @@
                 <div class="row justify-content-center">
                     <div class="col-lg-8 col-xl-7">
 
-                        <form action="/portafolio/add" method="post">
+                        <form action="/portafolio/add" method="post" enctype="multipart/form-data">
                             
                             <!-- Title input-->
                             <div class="form-floating mb-3">
@@ -26,6 +26,11 @@
                             <div class="form-floating mb-3">
                                 <input class="form-control" id="category" type="text" placeholder="Enter your title..." required name="category"/>
                                 <label for="category">Category</label>
+                            </div>
+                                <!-- Image input-->
+                            <div class="form-floating mb-3">
+                                <input class="form-control" id="image" type="file" placeholder="Select your imagen..." required name="image"/>
+                                <label for="image">Image</label>
                             </div>
 
                             <!-- Description input-->

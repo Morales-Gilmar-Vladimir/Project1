@@ -9,9 +9,14 @@ const { engine }  = require('express-handlebars')
 // importar methoOverride
 const methodOverride = require('method-override');
 
+
 // importar 
 const passport = require('passport');
 const session = require('express-session');
+
+
+//impoortar exoress-fileupload
+const fileUpload = require('express-fileupload')
 
 // Inicializaciones
 const app = express()
@@ -21,6 +26,12 @@ require('./config/passport')
 // Configuraciones 
 app.set('port',process.env.port || 3000)
 app.set('views',path.join(__dirname, 'views'))
+
+//ESTABLECER LA CARPETA TEMPORAL Y EL DIRECTORIO
+app.use(fileUpload({
+    useTempFiles : true,
+    tempFileDir : './uploads'
+}));
 
 // establecer el path de la carpeta views
 app.set('views',path.join(__dirname, 'views'))

@@ -1,0 +1,11 @@
+body{
+    background-color: aquamarine;
+}
+
+.contenedor{
+    background-color: antiquewhite;
+    width: 80%;
+    margin-top: 12px;
+    margin: 0 auto;
+}
+

@@ -1,0 +1,92 @@
+<!--Social Networks Section-->
+<section class="page-section mt-5" id="login">
+    <div class="container">
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Update profile for social
+            networks</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <form action="/social/edit/{{social._id}}?_method=PUT" method="post" enctype="multipart/form-data">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="name" type="text" placeholder="Enter your user..." required
+                            name="name" value="{{social.name}}"/>
+                        <label for="name">User</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="image" type="file" placeholder="Select your imagen..."
+                            name="image" accept="image/*" />
+                        <label for="image">Image</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <div style="color: #6C757D; font-size: 25px; font-weight: 700;">About me</div>
+                        <textarea class="form-control" id="description" type="text"
+                            placeholder="Enter your message here..." style="height: 10rem" required name="description">
+                            {{social.description}}
+                        </textarea>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="facebook" type="text" placeholder="Enter your link..."
+                            name="facebook" value="{{social.facebook}}"/>
+                        <label for="facebook">Facebook</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="linkedin" type="text" placeholder="Enter your link..."
+                            name="linkedin" value="{{social.linkedin}}" />
+                        <label for="linkedin">Linkedin</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="github" type="text" placeholder="Enter your link..."
+                            name="github" value="{{social.github}}" />
+                        <label for="github">Github</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="instagram" type="text" placeholder="Enter your link..."
+                            name="instagram" value="{{social.instagram}}"/>
+                        <label for="instagram">Instagram</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="tiktok" type="text" placeholder="Enter your link..."
+                            name="tiktok" value="{{social.tiktok}}"/>
+                        <label for="tiktok">Tiktok</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="twiter" type="text" placeholder="Enter your link..."
+                            name="twiter" value="{{social.twiter}}"/>
+                        <label for="twiter">Twiter</label>
+                    </div>
+
+                    <div class="text-end mt-3">
+                        <button type="submit" class="btn btn-primary btn-xl">Send</button>
+                    </div>
+
+                </form>
+                <div class="text-end mt-3">
+                    <a href="/social" class="text-decoration-none">
+                        <button class="btn btn-secondary btn-xl d-block w-100 h-10" type="submit">Cancel</button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .catch(error => {
+            console.log(error)
+        });
+</script>

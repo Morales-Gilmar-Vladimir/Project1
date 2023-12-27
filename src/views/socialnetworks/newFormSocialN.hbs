@@ -1,0 +1,86 @@
+<!--Social Networks Section-->
+<section class="page-section mt-5" id="login">
+    <div class="container">
+        <!-- Contact Section Heading-->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Add a new profile for social
+            networks</h2>
+        <!-- Icon Divider-->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+            <div class="divider-custom-line"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-7">
+                <form action="/social/add" method="post" enctype="multipart/form-data">
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="name" type="text" placeholder="Enter your user..." required
+                            name="name" />
+                        <label for="name">User</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="image" type="file" placeholder="Select your imagen..." required
+                            name="image" accept="image/*" />
+                        <label for="image">Image</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <div style="color: #6C757D; font-size: 25px; font-weight: 700;">About me</div>
+                        <textarea class="form-control" id="description" type="text"
+                            placeholder="Enter your message here..." style="height: 10rem" required name="description">
+                        </textarea>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="facebook" type="text" placeholder="Enter your link..."
+                            name="facebook" />
+                        <label for="facebook">Facebook</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="linkedin" type="text" placeholder="Enter your link..."
+                            name="linkedin" />
+                        <label for="linkedin">Linkedin</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="github" type="text" placeholder="Enter your link..."
+                            name="github" />
+                        <label for="github">Github</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="instagram" type="text" placeholder="Enter your link..."
+                            name="instagram" />
+                        <label for="instagram">Instagram</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="tiktok" type="text" placeholder="Enter your link..."
+                            name="tiktok" />
+                        <label for="tiktok">Tiktok</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input class="form-control" id="twiter" type="text" placeholder="Enter your link..."
+                            name="twiter" />
+                        <label for="twiter">Twiter</label>
+                    </div>
+
+                    <div class="text-end mt-3">
+                        <button type="submit" class="btn btn-primary btn-xl">Send</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#description'))
+        .catch(error => {
+            console.log(error)
+        });
+</script>

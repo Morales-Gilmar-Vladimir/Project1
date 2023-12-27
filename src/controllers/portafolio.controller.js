@@ -1,80 +1,86 @@
-//IMPORTAR MODELO
-const Portfolio = require('../models/Portfolio')
-//IMPORTAR EL METODO 
-const { uploadImage,deleteImage } = require('../config/cloudinary')
 
-//IMPORTAR FS-EXTRA
+// Importar el modelo 
+const Portfolio = require('../models/Portfolio')
+// Importar el método 
+const { uploadImage, deleteImage } = require('../config/cloudinary')
+// Importar fs
 const fs = require('fs-extra')
 
-// METODO PARA LISTAR LOS PORTAFOLIOS
-// const renderAllPortafolios = (req,res)=>{
-//     res.send('Listar todos los portafolios')
-// }
+
+
+// MÉTODO PARA LISTAR LOS PORTAFOLIOS
 const renderAllPortafolios = async(req,res)=>{
+    // Almacenar todos los portafolios del usuario que inicia sesión en la variable y luego convertir en json
     const portfolios = await Portfolio.find({user:req.user._id}).lean()
+    // Invoocar a la vista y mandar la variable 
     res.render("portafolio/allPortfolios",{portfolios})
 }
 
-// METODO PARA LISTAR EL DETALLE DE UN PORTAFOLIO
+
+
+
+// MÉTODO PARA LISTAR EL DETALLE DE UN PORTAFOLIO
 const renderPortafolio = (req,res)=>{
     res.send('Mostrar el detalle de un portafolio')
 }
 
-// METODO PARA MOSTAR EL FORMULARIO
-// const renderPortafolioForm = (req,res)=>{
-//     res.send('Formulario para crear un portafolio')
-// }
 
+
+
+
+
+// MÉTODO PARA MOSTRAR EL FORMULARIO 
 const renderPortafolioForm = (req,res)=>{
+    // INVOCACIÓN DE LA VISTA
     res.render('portafolio/newFormPortafolio')
 }
 
-// METODOPARA GUARDAR EN LA BDD
-// const createNewPortafolio = (req,res)=>{
-//     res.send('Crear un nuevo portafolio')
-// }
-// const createNewPortafolio =(req,res)=>{
-//     console.log(req.body);
-//     res.send("Portafolio almacenado en la BDD")
-// }
-// const createNewPortafolio =async (req,res)=>{
-//     const {title, category,description} = req.body
-//     const newPortfolio = new Portfolio({title,category,description})
-//     await newPortfolio.save()
-//     res.json({newPortfolio})
-// }
-
-const createNewPortafolio =async (req,res)=>{
-    const {title, category,description} = req.body   
-    
-    const newPortfolio = new Portfolio({title,category,description})
-    
+// MÉTODO PARA GUARDAR EN LA BDD LO CAPTURADO EN EL FORM 
+const createNewPortafolio = async (req,res)=>{
+    // Crear una nueva instancia del Portafolio
+    const newPortfolio = new Portfolio(req.body)
+    // Asociar el usuario que inicia sesión al portafolio
     newPortfolio.user = req.user._id
-    // VALIDAR SI EXISTE IMAGEN
+    // Validar la imágen
     if(!(req.files?.image)) return res.send("Se requiere una imagen")
+    // Invocar el método para que se almacene en cloudinary
     const imageUpload = await uploadImage(req.files.image.tempFilePath)
-   
     newPortfolio.image = {
         public_id:imageUpload.public_id,
         secure_url:imageUpload.secure_url
     }
+    // Eliminar los archivos temporales
     await fs.unlink(req.files.image.tempFilePath)
-   // UTILIZAR MEOTOD 
+    
+    // Almacenar en la BDD
     await newPortfolio.save()
     res.redirect('/portafolios')
 }
 
-// METODO PARA ACTUALIZAR EL FORMILARIO
-const renderEditPortafolioForm =async(req,res)=>{
+
+
+
+
+
+
+
+
+// MÉTODO PARA MOSTRAR EL FORMULARIO PARA ACTUALIZAR  
+const renderEditPortafolioForm = async(req,res)=>{
+    // Cargar la información del portafolio y convertir en un json
     const portfolio = await Portfolio.findById(req.params.id).lean()
+    // Invocar la vista y pasar la variable
     res.render('portafolio/editPortfolio',{portfolio})
 }
 
-// METODOO PARA ACTUALIZAR EN LA BDD LO CAPTURADO EN EL FORM
+
+
+// MÉTODO PARA ACTUALIZAR EN LA BDD LO CAPTURADO EN EL FORM 
 const updatePortafolio = async(req,res)=>{
     const portfolio = await Portfolio.findById(req.params.id).lean()
     if(portfolio._id != req.params.id) return res.redirect('/portafolios')
     
+    // Verificar si el usuario quiere actualizar la imagen o solo los campos extras
     if(req.files?.image) {
         if(!(req.files?.image)) return res.send("Se requiere una imagen")
         await deleteImage(portfolio.image.public_id)
@@ -98,17 +104,32 @@ const updatePortafolio = async(req,res)=>{
     res.redirect('/portafolios')
 }
 
-// METODOO PARA ELIMINAR
-// const deletePortafolio = (req,res)=>{
-//     res.send('Eliminar un nuevo portafolio')
-// }
+
+
+
+
+
+
+
+// MÉTODO PARA ELIMINAR EN LA BDD 
 const deletePortafolio = async(req,res)=>{
+
+    // Utilizar el método findByIdAndDelete
     const portafolio = await Portfolio.findByIdAndDelete(req.params.id)
     await deleteImage(portafolio.image.public_id)
     res.redirect('/portafolios')
 }
 
-// EXPORTACION COMMONJS NOMBRADA
+
+
+
+
+
+
+
+
+
+// EXPORTAR LAS FUNCIONES
 module.exports ={
     renderAllPortafolios,
     renderPortafolio,
@@ -118,4 +139,3 @@ module.exports ={
     updatePortafolio,
     deletePortafolio
 }
-

@@ -1,85 +1,90 @@
-// Importacion de express
+// Importación de express
 const express = require('express')
-// Importacion de path
+// Importar path
 const path = require('path');
-
-// Importacion de handleabars
+// Importar handlebars
 const { engine }  = require('express-handlebars')
-
-// importar methoOverride
+// Importar methodOverride
 const methodOverride = require('method-override');
-
-
-// importar 
+// Importar passport
 const passport = require('passport');
+// Importar session
 const session = require('express-session');
-
-
-//impoortar exoress-fileupload
+// Importar fileUpload
 const fileUpload = require('express-fileupload')
+
+
+
 
 // Inicializaciones
 const app = express()
 require('./config/passport')
 
 
-// Configuraciones 
-app.set('port',process.env.port || 3000)
-app.set('views',path.join(__dirname, 'views'))
 
-//ESTABLECER LA CARPETA TEMPORAL Y EL DIRECTORIO
+
+// Configuraciones 
+app.set('port', process.env.port || 3000)
+app.set('views', path.join(__dirname, 'views'))
+
+// Establecer el directorio de las vistas
+app.set('views',path.join(__dirname, 'views'))
+// Configuraciones para el motor de plantilla
+// 1 archivo master (master page)
+// 2 establecer el directorio layouts
+// 3 establecer el directorio partials
+// 4 extensión de las páginas .hbs
+app.engine('.hbs',engine({
+    defaultLayout:'main', // 1
+    layoutsDir: path.join(app.get('views'),'layouts'), // 2
+    partialsDir: path.join(app.get('views'),'partials'), // 3
+    extname:'.hbs' // 4
+}))
+// Establecer el motor de plantillas y su extensión
+app.set('view engine','.hbs')
+
+// Configuraciones de fileUpload
 app.use(fileUpload({
+    // Establecer archivo temporales
     useTempFiles : true,
+    // Especificar el directorio
     tempFileDir : './uploads'
 }));
 
-// establecer el path de la carpeta views
-app.set('views',path.join(__dirname, 'views'))
-// establecer conf.. extras
-app.engine('.hbs',engine({
-    // establecer master page
-    defaultLayout:'main',
-    // esta.. el path de la carpeta layouts
-    layoutsDir: path.join(app.get('views'),'layouts'),
-    // esta.. el path de la carpeta partials
-    partialsDir: path.join(app.get('views'),'partials'),
-    // establecer la extension de las paginas
-    extname:'.hbs'
-}))
-//establecer motor de plantilla
-app.set('view engine','.hbs')
+
 
 // Middlewares 
-// El servidor va a trabajar con informacion en vase a formularios
-app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({extended:false})) // FORMULARIOS - VISTAS
 app.use(methodOverride('_method'))
-
+// Establecer la sesión del usuario
 app.use(session({ 
     secret: 'secret',
     resave:true,
     saveUninitialized:true
 }));
+// Inicialización
 app.use(passport.initialize())
+// Mantener la sesión del usuario
 app.use(passport.session())
+
+
+
 
 // Variables globales
 app.use((req,res,next)=>{
     res.locals.user = req.user?.name || null
     next()
 })
+
 // Rutas 
 app.use(require('./routers/index.routes'))
-
 app.use(require('./routers/portafolio.routes'))
-
 app.use(require('./routers/user.routes'))
 
+
 // Archivos estáticos
-//Definir archivos estaticos y publicos 
 app.use(express.static(path.join(__dirname,'public')))
 
-// Exportar la variable
+
+// Exportar la variable app
 module.exports = app
-
-
-

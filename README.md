@@ -21,8 +21,7 @@
 ![WhatsApp Image 2023-12-22 at 09 55 02](https://github.com/Morales-Gilmar-Vladimir/Project1/assets/117743690/2e9581be-26a0-4e0b-8fd5-fb879beb6dc0)
 
 ## SPRINT 1
-## - Envio de correo electronico para los usuarios que se registren por primera vez en el sistema web y que posterior a ello les
-##   permita iniciar sesión únicamente si han confirmado su cuenta en el correo electrónico
+## - Envio de correo electronico para los usuarios que se registren por primera vez en el sistema web y que posterior a ello les permita iniciar sesión únicamente si han confirmado su cuenta en el correo electrónico
   
 ![WhatsApp Image 2023-12-26 at 23 37 04](https://github.com/Morales-Gilmar-Vladimir/Project1/assets/117743690/ebacc538-e8d0-4d65-8977-d6552d877209)
 ![WhatsApp Image 2023-12-26 at 23 37 54](https://github.com/Morales-Gilmar-Vladimir/Project1/assets/117743690/84256369-919f-4bed-b58e-65b7e9102cbc)

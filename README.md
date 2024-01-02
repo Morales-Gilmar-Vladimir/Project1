@@ -33,4 +33,6 @@
 
 ## DESPLIEGUE EN LA NUBE
 ![image](https://github.com/Morales-Gilmar-Vladimir/Project1/assets/117743690/dea71a66-91d6-429f-9493-5d356a95bf10)
+![image](https://github.com/Morales-Gilmar-Vladimir/Project1/assets/117743690/4be4345d-401d-4032-b25f-8aa2e54bfb1d)
+
 
